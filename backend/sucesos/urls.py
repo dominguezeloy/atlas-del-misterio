@@ -8,6 +8,8 @@ router.register(r'sucesos', views.SucesoViewSet, basename='suceso')
 
 urlpatterns = [
     path('', include(router.urls)),
+    # Predicciones (Calculadora del Destino)
+    path('predicciones/random/', views.random_prediccion, name='random-prediccion'),
     # Identificación sin contraseña (MVP)
     path('login-simple/', views.login_simple, name='login-simple'),
     # Sistema de votación

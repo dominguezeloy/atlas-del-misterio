@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Categoria, Suceso, ImagenSuceso, Fuente, UsuarioVisitante, Valoracion, Favorito
+from .models import Categoria, Suceso, ImagenSuceso, Fuente, UsuarioVisitante, Valoracion, Favorito, PrediccionMuerte
 
 
 @admin.register(Categoria)
@@ -161,6 +161,33 @@ class FavoritoAdmin(admin.ModelAdmin):
     list_display = ['usuario', 'suceso', 'fecha']
     search_fields = ['usuario__nick', 'suceso__titulo']
     readonly_fields = ['fecha']
+
+
+@admin.register(PrediccionMuerte)
+class PrediccionMuerteAdmin(admin.ModelAdmin):
+    list_display = ['descripcion_corta', 'activa', 'id']
+    list_editable = ['activa']
+    list_filter = ['activa']
+    search_fields = ['descripcion']
+    actions = ['activar_predicciones', 'desactivar_predicciones']
+    list_per_page = 20
+
+    def descripcion_corta(self, obj):
+        """Muestra la descripción truncada en el listado"""
+        if len(obj.descripcion) > 80:
+            return obj.descripcion[:80] + '...'
+        return obj.descripcion
+    descripcion_corta.short_description = 'Predicción'
+
+    def activar_predicciones(self, request, queryset):
+        updated = queryset.update(activa=True)
+        self.message_user(request, f'{updated} predicciones activadas.')
+    activar_predicciones.short_description = 'Activar predicciones seleccionadas'
+
+    def desactivar_predicciones(self, request, queryset):
+        updated = queryset.update(activa=False)
+        self.message_user(request, f'{updated} predicciones desactivadas.')
+    desactivar_predicciones.short_description = 'Desactivar predicciones seleccionadas'
 
 
 # Personalización del sitio de administración

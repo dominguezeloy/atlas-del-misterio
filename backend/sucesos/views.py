@@ -4,12 +4,15 @@ from django.core.exceptions import ValidationError
 from rest_framework import viewsets, filters, status
 from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
+from datetime import datetime, timedelta
+import random
 
-from .models import Categoria, Suceso, UsuarioVisitante, Valoracion, Favorito
+from .models import Categoria, Suceso, UsuarioVisitante, Valoracion, Favorito, PrediccionMuerte
 from .serializers import (
     CategoriaSerializer,
     SucesoListSerializer,
     SucesoDetailSerializer,
+    PrediccionMuerteSerializer,
 )
 
 
@@ -296,3 +299,84 @@ def mis_favoritos(request):
     )
 
     return Response({'favoritos': suceso_ids})
+
+
+@api_view(['GET'])
+def random_prediccion(request):
+    """
+    GET /api/predicciones/random/?anio_nacimiento=1995
+    Devuelve una predicción aleatoria para la Calculadora del Destino.
+
+    Lógica:
+    1. Calcular edad actual: 2026 - anio_nacimiento
+    2. Calcular fecha máxima: hoy + (100 - edad_actual) años
+    3. Generar fecha aleatoria entre: ahora y fecha_máxima
+    4. Seleccionar predicción aleatoria activa
+    5. NO guardar nada en la base de datos
+
+    Parámetro:
+    - anio_nacimiento (obligatorio): int entre 1900 y 2026
+
+    Retorna:
+    {
+        "id": int,
+        "descripcion": "string",
+        "fecha_destino": "2085-06-26T14:30:45Z"  # ISO 8601
+    }
+    """
+    anio_nacimiento = request.query_params.get('anio_nacimiento')
+
+    if not anio_nacimiento:
+        return Response(
+            {'error': 'Falta el parámetro obligatorio: anio_nacimiento.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    try:
+        anio_nacimiento = int(anio_nacimiento)
+    except ValueError:
+        return Response(
+            {'error': 'El año de nacimiento debe ser un número entero.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Validar rango de año
+    if anio_nacimiento < 1900 or anio_nacimiento > 2026:
+        return Response(
+            {'error': 'El año de nacimiento debe estar entre 1900 y 2026.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    # Calcular edad actual (suponiendo que estamos en 2026)
+    anio_actual = 2026
+    edad_actual = anio_actual - anio_nacimiento
+
+    # Fecha actual
+    ahora = datetime.now()
+
+    # Calcular fecha máxima (cuando cumpliría 100 años)
+    # = hoy + (100 - edad_actual) años
+    anios_faltantes = 100 - edad_actual
+    fecha_maxima = ahora + timedelta(days=365.25 * anios_faltantes)
+
+    # Generar fecha aleatoria entre ahora y fecha_máxima
+    segundos_entre = int((fecha_maxima - ahora).total_seconds())
+    segundos_aleatorios = random.randint(0, segundos_entre)
+    fecha_destino = ahora + timedelta(seconds=segundos_aleatorios)
+
+    # Seleccionar predicción aleatoria activa
+    predicciones_activas = PrediccionMuerte.objects.filter(activa=True)
+    if not predicciones_activas.exists():
+        return Response(
+            {'error': 'No hay predicciones disponibles en este momento.'},
+            status=status.HTTP_503_SERVICE_UNAVAILABLE
+        )
+
+    prediccion = random.choice(predicciones_activas)
+
+    # Retornar resultado (NO guardar en BD)
+    return Response({
+        'id': prediccion.id,
+        'descripcion': prediccion.descripcion,
+        'fecha_destino': fecha_destino.isoformat() + 'Z',
+    }, status=status.HTTP_200_OK)

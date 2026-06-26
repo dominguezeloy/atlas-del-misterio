@@ -368,3 +368,35 @@ class Favorito(models.Model):
 
     def __str__(self):
         return f'{self.usuario.nick} ♥ {self.suceso.titulo}'
+
+
+class PrediccionMuerte(models.Model):
+    """
+    Predicción humorística del destino para la Calculadora del Destino.
+
+    Campo:
+    - descripcion: texto único y absurdo (sin violencia real, suicidio, enfermedades)
+    - activa: si está disponible para mostrar en el cálculo
+
+    Notas:
+    - NO se guardan resultados (cálculos solo en memoria)
+    - El endpoint random selecciona una predicción activa al azar
+    - Se puede activar/desactivar desde admin para moderar contenido
+    """
+    descripcion = models.CharField(
+        max_length=255,
+        unique=True,
+        help_text='Predicción humorística del destino. Máx. 255 caracteres.'
+    )
+    activa = models.BooleanField(
+        default=True,
+        help_text='Mostrar esta predicción en la Calculadora del Destino'
+    )
+
+    class Meta:
+        verbose_name = 'Predicción de Muerte'
+        verbose_name_plural = 'Predicciones de Muerte'
+        ordering = ['-id']
+
+    def __str__(self):
+        return self.descripcion

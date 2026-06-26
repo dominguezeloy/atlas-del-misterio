@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Categoria, Suceso, ImagenSuceso, Fuente
+from .models import Categoria, Suceso, ImagenSuceso, Fuente, PrediccionMuerte
 
 
 class CategoriaSerializer(serializers.ModelSerializer):
@@ -129,3 +129,13 @@ class SucesoDetailSerializer(serializers.ModelSerializer):
                 return request.build_absolute_uri(obj.imagen_principal.url)
             return obj.imagen_principal.url
         return None
+
+
+class PrediccionMuerteSerializer(serializers.ModelSerializer):
+    """
+    Serializer para la Calculadora del Destino.
+    Solo expone la descripción (y la fecha_destino se genera en el backend).
+    """
+    class Meta:
+        model = PrediccionMuerte
+        fields = ['id', 'descripcion']
