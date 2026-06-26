@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend
+    container_name: atlas_backend
+    volumes:
+      - ./backend:/app
+      - media_data:/app/media
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - DJANGO_SETTINGS_MODULE=atlas_backend.settings
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py loaddata sucesos/fixtures/initial_data.json &&
+             python manage.py runserver 0.0.0.0:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: atlas_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  media_data:
