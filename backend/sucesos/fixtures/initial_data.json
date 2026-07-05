@@ -272,5 +272,31 @@
       "created_at": "2025-01-10T12:00:00Z",
       "updated_at": "2025-01-10T12:00:00Z"
     }
+  },
+  {
+    "model": "sucesos.suceso", "pk": 11,
+    "fields": {
+      "titulo": "La Cruz del Diablo de Cuenca",
+      "slug": "la-cruz-del-diablo-de-cuenca",
+      "categoria": 9,
+      "descripcion_corta": "En un solitario paraje de la Serranía de Cuenca se alza una cruz de piedra rodeada por una de las leyendas más inquietantes de la provincia. Desde hace siglos se dice que aquel lugar fue escenario de un enfrentamiento con el Diablo y que, durante determinadas noches, extrañas presencias continúan manifestándose.",
+      "descripcion_larga": "Situada en las inmediaciones de la ciudad de Cuenca, la conocida como Cruz del Diablo forma parte del rico patrimonio legendario de la Serranía conquense. Aunque la cruz actual ha sido restaurada en distintas ocasiones, la tradición sitúa su origen varios siglos atrás y la relaciona con un episodio considerado sobrenatural por generaciones de vecinos.\n\nLa versión más extendida cuenta que un viajero regresaba de noche cuando se encontró con un misterioso caballero vestido de negro. A medida que avanzaban por el camino, el desconocido comenzó a mostrar un comportamiento cada vez más inquietante hasta revelar su auténtica naturaleza: el Diablo.\n\nEl hombre, presa del pánico, invocó la protección divina y logró llegar al lugar donde hoy se levanta la cruz. Según la leyenda, la aparición desapareció entre una gran llamarada dejando tras de sí un fuerte olor a azufre. Como recuerdo de aquel suceso se erigió una cruz de piedra para proteger el camino y advertir a futuros viajeros.\n\nCon el paso de los siglos, numerosos vecinos han afirmado sentir una extraña sensación de inquietud al atravesar la zona durante la noche. Algunos hablan de cambios bruscos de temperatura, sombras que parecen moverse entre los árboles o la impresión de estar siendo observados, aunque nunca se ha obtenido ninguna prueba que confirme estos relatos.\n\nHistoriadores y especialistas en folclore consideran que la historia forma parte de la tradición oral castellana, donde las cruces de camino simbolizaban lugares asociados a sucesos trágicos, antiguos crímenes o supuestos encuentros con fuerzas sobrenaturales. Independientemente de su origen real, la Cruz del Diablo continúa siendo uno de los enclaves legendarios más conocidos de la provincia de Cuenca y sigue despertando la curiosidad de quienes recorren la Serranía.",
+      "latitud": "40.070000",
+      "longitud": "-2.140000",
+      "localidad": "Cuenca",
+      "provincia": "Cuenca",
+      "comunidad_autonoma": "Castilla-La Mancha",
+      "fecha_suceso": null,
+      "nivel_misterio": 4,
+      "relevancia": 80,
+      "imagen_principal": "",
+      "audio_url": "",
+      "video_url": "",
+      "meta_title": "La Cruz del Diablo de Cuenca | Atlas del Misterio",
+      "meta_description": "La leyenda de la Cruz del Diablo de Cuenca: apariciones, leyenda demoníaca y sucesos inexplicables en la Serranía.",
+      "estado": "PUBLICADO",
+      "created_at": "2025-01-11T12:00:00Z",
+      "updated_at": "2025-01-11T12:00:00Z"
+    }
   }
 ]

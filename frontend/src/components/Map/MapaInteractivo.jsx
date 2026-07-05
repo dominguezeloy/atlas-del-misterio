@@ -77,12 +77,6 @@ export default function MapaInteractivo({
         </div>
       )}
 
-      {/* Contador de sucesos visibles */}
-      {!loading && sucesos.length > 0 && (
-        <div className="absolute top-3 right-3 z-[1000] panel-oscuro px-3 py-1.5 text-xs font-misterio text-dorado/70 pointer-events-none">
-          {sucesos.length} suceso{sucesos.length !== 1 ? 's' : ''}
-        </div>
-      )}
     </div>
   )
 }
