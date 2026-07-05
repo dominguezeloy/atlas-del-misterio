@@ -8,9 +8,9 @@ export default function Navbar() {
   const { proveedorTiles, cambiarTema } = useMapTheme()
 
   return (
-    <header className="relative z-50 flex items-center justify-between px-4 py-3 bg-carbon/95 backdrop-blur-sm border-b border-dorado/20">
+    <header className="relative z-50 flex items-center justify-between px-4 py-3 bg-carbon/95 backdrop-blur-sm border-b border-dorado/20 overflow-visible">
       {/* Logo / Título + Icono Destino */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 overflow-visible">
         <Link
           to="/"
           className="flex items-center gap-3 group"
@@ -29,14 +29,13 @@ export default function Navbar() {
         {/* Icono Calculadora del Destino */}
         <Link
           to="/destino"
-          className="relative group"
-          title="Calcula tu destino"
+          className="relative z-50 group overflow-visible"
         >
           <span className="text-2xl transition-all duration-300 group-hover:text-yellow-500 group-hover:scale-125 inline-block">
             ☠
           </span>
-          {/* Tooltip */}
-          <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1.5 bg-black border border-yellow-600 text-yellow-500 text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none font-cuerpo">
+
+          <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 px-3 py-1.5 bg-black border border-yellow-600 text-yellow-500 text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none font-cuerpo shadow-lg">
             Calcula tu destino
           </span>
         </Link>
@@ -46,15 +45,15 @@ export default function Navbar() {
           href="https://entre-misterios-shop.fourthwall.com/en-eur"
           target="_blank"
           rel="noreferrer"
-          className="relative group"
-          title="Abrir la tienda"
+          className="relative z-50 group overflow-visible"
         >
           <img
             src={shopIcon}
             alt="Tienda"
             className="w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-110"
           />
-          <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1.5 bg-black border border-dorado/40 text-dorado-claro text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none font-cuerpo">
+
+          <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 px-3 py-1.5 bg-black border border-dorado/40 text-dorado-claro text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none font-cuerpo shadow-lg">
             Tienda
           </span>
         </a>
@@ -64,9 +63,17 @@ export default function Navbar() {
       <div className="flex items-center gap-3">
         {/* Botón cambio de tema */}
         <button
-          onClick={() => cambiarTema(proveedorTiles === 'cartoDark' ? 'cartoVoyager' : 'cartoDark')}
+          onClick={() =>
+            cambiarTema(
+              proveedorTiles === 'cartoDark' ? 'cartoVoyager' : 'cartoDark'
+            )
+          }
           className="text-xs text-dorado/50 hover:text-dorado transition-colors border border-dorado/20 hover:border-dorado/50 px-3 py-1.5 rounded-lg font-misterio tracking-wider"
-          title={proveedorTiles === 'cartoDark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+          title={
+            proveedorTiles === 'cartoDark'
+              ? 'Cambiar a tema claro'
+              : 'Cambiar a tema oscuro'
+          }
         >
           {proveedorTiles === 'cartoDark' ? '☀️ Claro' : '🌙 Oscuro'}
         </button>
@@ -79,6 +86,7 @@ export default function Navbar() {
                 {usuario.nick}
               </span>
             </div>
+
             <button
               onClick={logout}
               className="text-xs text-dorado/50 hover:text-dorado transition-colors border border-dorado/20 hover:border-dorado/50 px-3 py-1.5 rounded-lg font-misterio tracking-wider"
