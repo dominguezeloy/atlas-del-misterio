@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useUsuario } from '../../context/UsuarioContext'
 import { useMapTheme } from '../../context/MapThemeContext'
+import shopIcon from '../../../assets/icons/Shop icon.png'
 
 export default function Navbar() {
   const { usuario, logout, abrirLogin } = useUsuario()
@@ -39,6 +40,24 @@ export default function Navbar() {
             Calcula tu destino
           </span>
         </Link>
+
+        {/* Icono Tienda externa */}
+        <a
+          href="https://entre-misterios-shop.fourthwall.com/en-eur"
+          target="_blank"
+          rel="noreferrer"
+          className="relative group"
+          title="Abrir la tienda"
+        >
+          <img
+            src={shopIcon}
+            alt="Tienda"
+            className="w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-110"
+          />
+          <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1.5 bg-black border border-dorado/40 text-dorado-claro text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none font-cuerpo">
+            Tienda
+          </span>
+        </a>
       </div>
 
       {/* Área de usuario */}
