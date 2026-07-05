@@ -4,12 +4,14 @@ import FiltrosCategorias from '../components/UI/FiltrosCategorias'
 import MapaInteractivo from '../components/Map/MapaInteractivo'
 import { useSucesos } from '../hooks/useSucesos'
 import { useCategorias } from '../hooks/useCategorias'
+import { useMapTheme } from '../context/MapThemeContext'
 
 /**
  * Página principal: Navbar + Mapa a pantalla completa + Filtros flotantes.
  */
 export default function MapaPage() {
   const [categoriaActiva, setCategoriaActiva] = useState(null)
+  const { proveedorTiles } = useMapTheme()
 
   // Cargar datos
   const { categorias } = useCategorias()
@@ -30,6 +32,7 @@ export default function MapaPage() {
         <MapaInteractivo
           sucesos={sucesosVisibles}
           loading={loading}
+          proveedorTiles={proveedorTiles}
         />
 
         {/* Filtros flotantes sobre el mapa */}

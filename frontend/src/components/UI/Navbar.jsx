@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useUsuario } from '../../context/UsuarioContext'
+import { useMapTheme } from '../../context/MapThemeContext'
 
 export default function Navbar() {
   const { usuario, logout, abrirLogin } = useUsuario()
+  const { proveedorTiles, cambiarTema } = useMapTheme()
 
   return (
     <header className="relative z-50 flex items-center justify-between px-4 py-3 bg-carbon/95 backdrop-blur-sm border-b border-dorado/20">
@@ -41,6 +43,15 @@ export default function Navbar() {
 
       {/* Área de usuario */}
       <div className="flex items-center gap-3">
+        {/* Botón cambio de tema */}
+        <button
+          onClick={() => cambiarTema(proveedorTiles === 'cartoDark' ? 'cartoVoyager' : 'cartoDark')}
+          className="text-xs text-dorado/50 hover:text-dorado transition-colors border border-dorado/20 hover:border-dorado/50 px-3 py-1.5 rounded-lg font-misterio tracking-wider"
+          title={proveedorTiles === 'cartoDark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
+        >
+          {proveedorTiles === 'cartoDark' ? '☀️ Claro' : '🌙 Oscuro'}
+        </button>
+
         {usuario ? (
           <>
             <div className="hidden sm:flex items-center gap-2 text-sm">
