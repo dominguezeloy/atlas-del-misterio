@@ -11,6 +11,8 @@ Las historias las vamos añadiendo y también hay la opción de que la gente las
 
 El usuario hace un test y le saldrá un destino...
 
+# Aparatos
+
 # Introduce tu historia
 
 # Tienda
