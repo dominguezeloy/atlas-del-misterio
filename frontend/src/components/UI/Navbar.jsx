@@ -8,7 +8,7 @@ export default function Navbar() {
   const { proveedorTiles, cambiarTema } = useMapTheme()
 
   return (
-    <header className="relative z-50 flex items-center justify-between px-4 py-3 bg-carbon/95 backdrop-blur-sm border-b border-dorado/20 overflow-visible">
+    <header className="relative z-50 flex items-center justify-between px-4 py-6 bg-carbon/95 backdrop-blur-sm border-b border-dorado/20 overflow-visible">
       {/* Logo / Título + Icono Destino */}
       <div className="flex items-center gap-4 overflow-visible">
         <Link
@@ -29,14 +29,14 @@ export default function Navbar() {
         {/* Icono Calculadora del Destino */}
         <Link
           to="/destino"
-          className="relative z-50 group overflow-visible"
+          className="relative z-50 flex flex-col items-center overflow-visible"
+          title="Destino"
         >
-          <span className="text-2xl transition-all duration-300 group-hover:text-yellow-500 group-hover:scale-125 inline-block">
+          <span className="text-4xl inline-block">
             ☠
           </span>
-
-          <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 px-3 py-1.5 bg-black border border-yellow-600 text-yellow-500 text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none font-cuerpo shadow-lg">
-            Calcula tu destino
+          <span className="text-xs text-dorado/70 font-misterio tracking-wider mt-1">
+            Destino
           </span>
         </Link>
 
@@ -45,15 +45,15 @@ export default function Navbar() {
           href="https://entre-misterios-shop.fourthwall.com/en-eur"
           target="_blank"
           rel="noreferrer"
-          className="relative z-50 group overflow-visible"
+          className="relative z-50 flex flex-col items-center overflow-visible"
+          title="Tienda"
         >
           <img
             src={shopIcon}
             alt="Tienda"
-            className="w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-110"
+            className="w-10 h-10 object-contain"
           />
-
-          <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 px-3 py-1.5 bg-black border border-dorado/40 text-dorado-claro text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none font-cuerpo shadow-lg">
+          <span className="text-xs text-dorado/70 font-misterio tracking-wider mt-1">
             Tienda
           </span>
         </a>
